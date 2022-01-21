@@ -35,11 +35,6 @@ object AppModule {
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-//            .addInterceptor { chain ->
-//                chain.proceed(chain.request().newBuilder().apply {
-//                    addHeader("Authorization", "token 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")
-//                }.build())
-//            }
             .addInterceptor(interceptor)
             .build()
     }
