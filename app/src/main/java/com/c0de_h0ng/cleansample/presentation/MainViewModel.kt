@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor(
         getUserUseCase(searchWord).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-
+                    _searchResult.value = result.data
                 }
                 is Resource.Error -> {
 

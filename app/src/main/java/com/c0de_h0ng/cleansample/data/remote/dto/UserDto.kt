@@ -13,18 +13,12 @@ data class UserDto(
 )
 
 fun UserDto.toUserList(): List<User> {
-    val result = mutableListOf<User>()
-    for (i in userList.indices) {
-        with(userList[i]) {
-            result.add(
-                User(
-                    id = id,
-                    login = login,
-                    htmlUrl = htmlUrl,
-                    reposUrl = reposUrl
-                )
-            )
-        }
+    return userList.toList().map {
+        User(
+            id = it.id,
+            login = it.login,
+            htmlUrl = it.htmlUrl,
+            reposUrl = it.reposUrl
+        )
     }
-    return result
 }

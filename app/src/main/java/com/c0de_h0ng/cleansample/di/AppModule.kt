@@ -5,6 +5,8 @@ import com.c0de_h0ng.cleansample.common.Constants.CONNECT_TIMEOUT
 import com.c0de_h0ng.cleansample.common.Constants.READ_TIMEOUT
 import com.c0de_h0ng.cleansample.common.Constants.WRITE_TIMEOUT
 import com.c0de_h0ng.cleansample.common.PrettyHttpLogging
+import com.c0de_h0ng.cleansample.data.datasource.RemoteDatSource
+import com.c0de_h0ng.cleansample.data.datasource.RemoteDataSourceImpl
 import com.c0de_h0ng.cleansample.data.remote.GitHubApi
 import com.c0de_h0ng.cleansample.data.repository.GitHubRepositoryImpl
 import com.c0de_h0ng.cleansample.domain.repository.GitHubRepository
@@ -52,8 +54,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGitHubRepository(api: GitHubApi): GitHubRepository {
-        return GitHubRepositoryImpl(api)
+    fun provideRemoteDataSource(api: GitHubApi): RemoteDatSource {
+        return RemoteDataSourceImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGitHubRepository(remote: RemoteDatSource): GitHubRepository {
+        return GitHubRepositoryImpl(remote)
     }
 
 }

@@ -21,23 +21,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rxJava()
-    }
-
-    fun rxJava() {
-
-        val src = Observable.interval(1, TimeUnit.SECONDS)
-            .publish()
-            .autoConnect(2)
-        src.subscribe { i ->
-            Log.d("A:", i.toString())
-        }
-        src.subscribe { i ->
-            Log.d("B:", i.toString())
-        }
-        Thread.sleep(3000)
+        observeViewModel()
+        viewModel.getSearchResult("mike")
     }
 
 
+    private fun observeViewModel() {
+        viewModel.searchResult.observe(this) {
+            Log.d("User Result Size ", it.size.toString())
+        }
+    }
 
 }

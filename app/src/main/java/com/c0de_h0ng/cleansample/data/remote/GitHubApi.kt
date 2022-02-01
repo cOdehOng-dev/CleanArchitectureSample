@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface GitHubApi {
 
     @GET("users")
-    suspend fun getUser(
+    suspend fun getUserList(
         @Query("q") searchUser: String
     ) : UserDto
 
