@@ -2,6 +2,7 @@ package com.c0de_h0ng.cleansample.data.datasource
 
 import com.c0de_h0ng.cleansample.data.remote.GitHubApi
 import com.c0de_h0ng.cleansample.data.remote.dto.UserDto
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -13,5 +14,9 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getUserList(searchWord: String): UserDto {
         return api.getUserList(searchWord)
+    }
+
+    override fun getRxUserList(searchWord: String): Observable<UserDto> {
+        return api.getRxUserList(searchWord)
     }
 }

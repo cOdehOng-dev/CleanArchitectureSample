@@ -1,6 +1,7 @@
 package com.c0de_h0ng.cleansample.data.remote
 
 import com.c0de_h0ng.cleansample.data.remote.dto.UserDto
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,5 +14,10 @@ interface GitHubApi {
     suspend fun getUserList(
         @Query("q") searchUser: String
     ) : UserDto
+
+    @GET("users")
+    fun getRxUserList(
+        @Query("q") searchUser: String
+    ) : Observable<UserDto>
 
 }
