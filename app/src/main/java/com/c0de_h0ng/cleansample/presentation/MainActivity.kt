@@ -6,8 +6,12 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.c0de_h0ng.cleansample.R
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.observables.ConnectableObservable
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -17,6 +21,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        rxJava()
     }
+
+    fun rxJava() {
+
+        val src = Observable.interval(1, TimeUnit.SECONDS)
+            .publish()
+            .autoConnect(2)
+        src.subscribe { i ->
+            Log.d("A:", i.toString())
+        }
+        src.subscribe { i ->
+            Log.d("B:", i.toString())
+        }
+        Thread.sleep(3000)
+    }
+
+
 
 }
