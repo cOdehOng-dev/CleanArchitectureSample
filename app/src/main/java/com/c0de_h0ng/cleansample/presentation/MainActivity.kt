@@ -20,12 +20,15 @@ class MainActivity : AppCompatActivity() {
         viewModel.getRxSearchResult("mike") // RxJava
     }
 
-
     private fun observeViewModel() {
         with(viewModel) {
-
+            // Coroutine
+            searchResult.observe(this@MainActivity) {
+                Log.d("CoroutineResult Size", it.count().toString())
+            }
+            // RxJava
             rxSearchResult.observe(this@MainActivity) {
-                Log.d("RxJavaCallResult Size", it.count().toString())
+                Log.d("RxJavaResult Size", it.count().toString())
             }
         }
     }

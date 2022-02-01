@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.c0de_h0ng.cleansample.common.BaseViewModel
 import com.c0de_h0ng.cleansample.common.CallResult
-import com.c0de_h0ng.cleansample.common.Resource
 import com.c0de_h0ng.cleansample.data.remote.dto.toUserList
 import com.c0de_h0ng.cleansample.domain.model.User
 import com.c0de_h0ng.cleansample.domain.usecase.GetRxUserUseCase
@@ -40,13 +39,16 @@ class MainViewModel @Inject constructor(
     fun getSearchResult(searchWord: String) {
         getUserUseCase(searchWord).onEach { result ->
             when (result) {
-                is Resource.Success -> {
-                    //_searchResult.value = result.data
+                is CallResult.Success -> {
+                    Log.d("CoroutineCallResult ", "Success")
+                    _searchResult.value = result.data ?: emptyList()
                 }
-                is Resource.Error -> {
+                is CallResult.Error -> {
+                    Log.d("CoroutineCallResult ", "Error")
 
                 }
-                is Resource.Loading -> {
+                is CallResult.Loading -> {
+                    Log.d("CoroutineCallResult ", "Loading")
 
                 }
             }
@@ -63,7 +65,7 @@ class MainViewModel @Inject constructor(
                     _rxSearchResult.value = user?.toUserList()
                 }
                 is CallResult.Error -> {
-                    Log.d("RxJavaCallResult ", "Fail")
+                    Log.d("RxJavaCallResult ", "Error")
                 }
                 is CallResult.Loading -> {
                     Log.d("RxJavaCallResult ", "Loading")

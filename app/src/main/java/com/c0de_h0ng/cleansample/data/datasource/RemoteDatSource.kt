@@ -9,6 +9,5 @@ import io.reactivex.Observable
 interface RemoteDatSource {
 
     suspend fun getUserList(searchWord: String): UserDto
-
     fun getRxUserList(searchWord: String): Observable<UserDto>
 }

@@ -1,6 +1,6 @@
 package com.c0de_h0ng.cleansample.domain.usecase
 
-import com.c0de_h0ng.cleansample.common.Resource
+import com.c0de_h0ng.cleansample.common.CallResult
 import com.c0de_h0ng.cleansample.data.remote.dto.toUserList
 import com.c0de_h0ng.cleansample.domain.model.User
 import com.c0de_h0ng.cleansample.domain.repository.GitHubRepository
@@ -17,15 +17,16 @@ class GetUserUseCase @Inject constructor(
     private val repository: GitHubRepository
 ) {
 
-    operator fun invoke(searchUser: String): Flow<Resource<List<User>>> = flow {
+    operator fun invoke(searchUser: String): Flow<CallResult<List<User>>> = flow {
         try {
-            emit(Resource.Loading<List<User>>())
-            val user = repository.getUserList(searchUser).toUserList()
-            emit(Resource.Success<List<User>>(user))
+            val userList = repository.getUserList(searchUser).toUserList()
+            emit(CallResult.Success(userList))
         } catch (e: HttpException) {
-            emit(Resource.Error<List<User>>(e.localizedMessage ?: "An unexpected error occured"))
+            emit(CallResult.Error(e.localizedMessage ?: "An unexpected error occured", 400))
         } catch (e: IOException) {
-            emit(Resource.Error<List<User>>("Couldn't reach server. Check your internet"))
+            emit(CallResult.Error("Couldn't reach server. Check your internet", 400))
+        } finally {
+            emit(CallResult.Loading(isLoading = false))
         }
     }
 }
