@@ -13,7 +13,7 @@ hilt를 이용한 클린 아키텍처 샘플
 - Databinding
 - Coroutine
 
-## Third party
+## Library
 - Retrofit
 - Okhttp
 - Glide
