@@ -1,4 +1,4 @@
-# hilt-mvvm-cleanArchitecture-sample
+# hilt-mvvm-clean-architecture-sample
 
 ## Description
 ```
