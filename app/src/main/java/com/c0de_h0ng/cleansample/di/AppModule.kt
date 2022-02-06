@@ -6,7 +6,6 @@ import com.c0de_h0ng.cleansample.common.Constants.BASE_URL
 import com.c0de_h0ng.cleansample.common.Constants.CONNECT_TIMEOUT
 import com.c0de_h0ng.cleansample.common.Constants.READ_TIMEOUT
 import com.c0de_h0ng.cleansample.common.Constants.WRITE_TIMEOUT
-import com.c0de_h0ng.cleansample.common.PrettyHttpLogging
 import com.c0de_h0ng.cleansample.data.datasource.LocalDataSource
 import com.c0de_h0ng.cleansample.data.datasource.LocalDataSourceImpl
 import com.c0de_h0ng.cleansample.data.datasource.RemoteDatSource
@@ -16,6 +15,7 @@ import com.c0de_h0ng.cleansample.data.local.RecentSearchDao
 import com.c0de_h0ng.cleansample.data.remote.GitHubApi
 import com.c0de_h0ng.cleansample.data.repository.GitHubRepositoryImpl
 import com.c0de_h0ng.cleansample.domain.repository.GitHubRepository
+import com.c0de_h0ng.library.PrettyHttpLogging
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

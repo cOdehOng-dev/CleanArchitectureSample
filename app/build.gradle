@@ -83,4 +83,6 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
+    implementation "com.github.cOdehOng-dev:c0de-h0ng-library:$code_hong_lib_version"
+
 }
